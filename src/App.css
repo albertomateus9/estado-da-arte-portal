@@ -10,9 +10,9 @@
   --font-body: 'Inter', sans-serif;
   
   /* Color Palette */
-  --bg-dark: #060913;
-  --bg-card: rgba(13, 22, 43, 0.45);
-  --bg-modal: #090e1f;
+  --bg-dark: #050811;
+  --bg-card: rgba(11, 18, 36, 0.45);
+  --bg-modal: #070c1a;
   
   --border-light: rgba(255, 255, 255, 0.05);
   --border-glow: rgba(99, 102, 241, 0.2);
@@ -24,7 +24,7 @@
   
   --text-primary: #f3f4f6;
   --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
+  --text-muted: #6b7280;
 }
 
 body {
@@ -91,8 +91,8 @@ body {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--border-light);
-  padding-bottom: 2rem;
-  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
   gap: 1.5rem;
 }
@@ -116,7 +116,7 @@ body {
 
 .portal-header h1 {
   font-family: var(--font-title);
-  font-size: 2.5rem;
+  font-size: 2.25rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   background: linear-gradient(to right, #ffffff, #a5b4fc, #22d3ee);
@@ -152,57 +152,528 @@ body {
   font-weight: 600;
 }
 
-/* Stats Board */
-.stats-board {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 3.5rem;
+/* Tab Navigation */
+.tab-navigation-container {
+  display: flex;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 2px;
 }
 
-.stat-card {
+.tab-navigation {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tab-navigation button {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.tab-navigation button:hover {
+  color: #fff;
+}
+
+.tab-navigation button.active {
+  color: var(--accent-cyan);
+}
+
+.tab-navigation button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--accent-indigo), var(--accent-cyan));
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 -2px 10px rgba(6, 182, 212, 0.4);
+}
+
+/* Tab Pane Fade-In Animation */
+.tab-pane {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Stats charts section */
+.stats-charts-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.chart-container {
   background: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: 20px;
-  padding: 1.75rem;
-  backdrop-filter: blur(12px);
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.chart-container h4 {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.02em;
+}
+
+.chart-svg-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.chart-legend {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
-.stat-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-.stat-value {
-  font-family: var(--font-title);
-  font-size: 2.75rem;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1;
-}
-
-.stat-label {
-  font-size: 0.875rem;
+.legend-item {
+  font-size: 0.8rem;
   color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.legend-color.bg-cyan { background-color: var(--accent-cyan); }
+.legend-color.bg-purple { background-color: var(--accent-purple); }
+
+.stats-grid-small {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 1rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.mini-stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.mini-stat-card h5 {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mini-stat-card p {
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.mini-stat-card span {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Scientific Table design */
+.matrix-table-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 24px;
+  padding: 2rem;
+  backdrop-filter: blur(12px);
+}
+
+.table-header-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.table-header-controls h3 {
+  font-family: var(--font-title);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.table-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.search-box.small input {
+  padding: 8px 12px 8px 36px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+}
+
+.search-box.small .search-icon {
+  left: 12px;
+}
+
+.table-filters select {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.scientific-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.scientific-table th {
+  border-bottom: 2px solid var(--border-light);
+  padding: 12px 16px;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.scientific-table tr {
+  border-bottom: 1px solid var(--border-light);
+  transition: background 0.15s;
+  cursor: pointer;
+}
+
+.scientific-table tr:hover {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.scientific-table td {
+  padding: 16px;
+  vertical-align: middle;
+}
+
+.citation-key code {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--accent-glow);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.8rem;
+  border: 1px solid rgba(99, 102, 241, 0.15);
+}
+
+.table-paper-title {
+  max-width: 320px;
+}
+
+.table-paper-title strong {
+  display: block;
+  color: #fff;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 0.25rem;
+}
+
+.table-authors-span {
+  display: block;
+  font-size: 0.775rem;
+  color: var(--text-muted);
+}
+
+.category-tag-small {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.category-tag-small.tea {
+  background: rgba(6, 182, 212, 0.12);
+  color: var(--accent-cyan);
+}
+
+.category-tag-small.pose {
+  background: rgba(168, 85, 247, 0.12);
+  color: var(--accent-purple);
+}
+
+.env-tag {
+  font-size: 0.775rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.env-tag.school {
+  background: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+}
+
+.env-tag.clinical {
+  background: rgba(245, 158, 11, 0.1);
+  color: #fbbf24;
+}
+
+.btn-copy-citation {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all 0.2s;
+}
+
+.btn-copy-citation:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.btn-copy-citation.copied {
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #34d399 !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+/* Math sandbox grid */
+.math-sandbox-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.sandbox-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 24px;
+  padding: 2rem;
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 0.75rem;
+}
+
+.panel-header h3 {
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.panel-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.control-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.slider-labels label {
+  color: var(--text-primary);
   font-weight: 500;
 }
 
-.text-cyan {
-  color: var(--accent-cyan) !important;
+.slider-labels span {
+  font-family: monospace;
+  font-weight: 600;
+  color: var(--accent-cyan);
 }
 
-.text-purple {
-  color: var(--accent-purple) !important;
+.control-slider input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent-cyan);
+  cursor: pointer;
 }
 
-/* Mapping Matrix interactive section */
+.slider-help {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+.sandbox-outputs {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sandbox-outputs h4 {
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.output-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.output-row span {
+  color: var(--text-secondary);
+}
+
+.output-row strong {
+  color: #34d399;
+  font-family: monospace;
+  font-size: 0.875rem;
+}
+
+.formula-block {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.formula-block h5 {
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+
+.formula-latex {
+  background: #020308;
+  border-radius: 10px;
+  padding: 1rem;
+  overflow-x: auto;
+  text-align: center;
+  color: #fff;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.formula-desc {
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* BibTeX section in Modal */
+.bibtex-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.bibtex-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-copy-citation-modal {
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  color: var(--accent-glow);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-copy-citation-modal:hover {
+  background: rgba(99, 102, 241, 0.25);
+  color: #fff;
+}
+
+.btn-copy-citation-modal.copied {
+  background: rgba(16, 185, 129, 0.2) !important;
+  color: #34d399 !important;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+}
+
+.bibtex-code-pre {
+  background: #03050b !important;
+  border: 1px solid rgba(255,255,255,0.04) !important;
+}
+
+/* Original Matrix/Card Grid layout overrides */
 .matrix-section {
-  background: rgba(13, 22, 43, 0.25);
+  background: rgba(11, 18, 36, 0.25);
   border: 1px solid var(--border-light);
   border-radius: 24px;
   padding: 2.5rem;
@@ -239,7 +710,7 @@ body {
 
 .matrix-card {
   position: relative;
-  background: #090e1f;
+  background: #070c1a;
   border: 1px solid var(--border-light);
   border-radius: 16px;
   text-align: left;
@@ -274,7 +745,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(9, 14, 31, 0.4) 0%, rgba(9, 14, 31, 0.95) 100%);
+  background: linear-gradient(to bottom, rgba(7, 12, 26, 0.4) 0%, rgba(7, 12, 26, 0.95) 100%);
   z-index: 2;
 }
 
@@ -344,10 +815,6 @@ body {
 
 .matrix-card.active .matrix-badge {
   color: var(--accent-cyan);
-}
-
-.text-grey {
-  color: var(--text-muted);
 }
 
 /* Controls: Search, Filters, Sort */
@@ -768,7 +1235,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top, rgba(9, 14, 31, 1) 0%, rgba(9, 14, 31, 0) 60%);
+  background: linear-gradient(to top, rgba(7, 12, 26, 1) 0%, rgba(7, 12, 26, 0) 60%);
 }
 
 .showcase-caption {
@@ -813,7 +1280,7 @@ body {
 .meta-item strong {
   color: var(--text-muted);
   font-weight: 500;
-  min-width: 100px;
+  min-width: 130px;
 }
 
 .meta-item span {
@@ -897,7 +1364,7 @@ body {
 
 /* Code & Math window formatting */
 .code-block-wrapper {
-  background: #05070f;
+  background: #03050b;
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 12px;
   overflow: hidden;
@@ -939,7 +1406,6 @@ body {
   white-space: pre-wrap;
 }
 
-/* LaTeX formula styling */
 .code-pre code {
   font-family: inherit;
 }
@@ -1022,6 +1488,12 @@ body {
 }
 
 /* Responsive adjustment */
+@media(max-width: 992px) {
+  .math-sandbox-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media(max-width: 768px) {
   .portal-header {
     flex-direction: column;
@@ -1057,4 +1529,42 @@ body {
   .modal-card {
     max-height: 95vh;
   }
+  .stats-charts-section {
+    grid-template-columns: 1fr;
+  }
 }
+
+/* Active filter badge in table header */
+.active-filter-badge {
+  background: rgba(6, 182, 212, 0.15);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  margin-left: 1rem;
+  font-family: var(--font-body);
+}
+
+.active-filter-badge button {
+  background: transparent;
+  border: none;
+  color: var(--accent-cyan);
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: color 0.15s;
+}
+
+.active-filter-badge button:hover {
+  color: #fff;
+}
+
