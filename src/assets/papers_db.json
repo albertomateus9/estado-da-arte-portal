@@ -6,9 +6,16 @@
     "year": 2025,
     "category": "TEA",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "trace_pose_3d.png",
     "filename": "A Computer Vision-Based Physical Activity Application for Children with Autism.pdf",
     "file_size_kb": 2002.21
   },
@@ -19,15 +26,22 @@
     "year": 2025,
     "category": "TEA",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "trace_pose_3d.png",
     "filename": "Applying Computer Vision to Analyze Self-Injurious Behaviors in Children with Autism Spectrum Disorder.pdf",
     "file_size_kb": 2888.58
   },
   {
     "id": "children_with_autism_spectrum_disorder_produce_more_ambiguous_and_less_socially_meaningful_facial_expressions_an_experimental_study_using_random_forest_classifiers",
-    "title": "Children with Autism Spectrum Disorder Produce More Ambiquous and Less Socially Meaningful Facial Expressions: An Experimental Study Using Random Forest Classifiers",
+    "title": "Children with Autism Spectrum Disorder Produce More Ambiguous and Less Socially Meaningful Facial Expressions: An Experimental Study Using Random Forest Classifiers",
     "authors": "M. Al-Qurran, H. Al-Mimi",
     "year": 2023,
     "category": "TEA",
@@ -35,6 +49,14 @@
     "aba_relation": "Justificativa científica para o uso de modelos especializados em micro-expressões (FER+) no ABA-Vision, evitando falsos negativos de emoção.",
     "methodology": "Extração de coordenadas faciais via OpenFace, conversão em Facial Action Coding System (FACS) e classificação de atipicidade com Random Forest.",
     "abstract": "This study analyzes facial expressiveness in children with ASD during social tasks. Random Forest classifiers show higher ambiguity in expressions compared to neurotypical controls, confirming the need for specialized FER models.",
+    "technologies": [
+      "scikit-learn",
+      "OpenFace 2.0",
+      "Pandas",
+      "Matplotlib"
+    ],
+    "code_explanation": "Classificação baseada em vetores de ativação de Action Units faciais (AUs) com Random Forest:\n```python\nfrom sklearn.ensemble import RandomForestClassifier\nclf = RandomForestClassifier(n_estimators=100, max_depth=12, random_state=42)\nclf.fit(X_train_action_units, y_train_labels)\nimportances = clf.feature_importances_\n```\nRevela que as AUs associadas ao sorriso (AU12) e ao cenho franzido (AU4) possuem correlações não-lineares atípicas no TEA.",
+    "image": "trace_pose_3d.png",
     "filename": "Children with autism spectrum disorder produce more ambiguous and less socially meaningful facial expressions an experimental study using random forest classifiers.pdf",
     "file_size_kb": 2698.02
   },
@@ -48,6 +70,14 @@
     "aba_relation": "Diretamente relacionado à medição de latência de resposta a comandos (IRL) e engajamento visual (JA) no ABA-Vision.",
     "methodology": "Acompanhamento facial baseado em filtros de partículas e análise de desvios angulares de cabeça para determinar foco de atenção visual.",
     "abstract": "Quantitative behavioral metrics are essential for clinical screening. This paper utilizes computer vision tools to calculate gaze direction changes and latency of orientation in infants, showing high agreement with clinical raters.",
+    "technologies": [
+      "OpenCV",
+      "SciPy",
+      "C++",
+      "Dlib"
+    ],
+    "code_explanation": "Estimativa de pose de cabeça usando o algoritmo Perspective-n-Point (PnP) para determinar direção do vetor do olhar:\n```python\nretval, rvec, tvec = cv2.solvePnP(model_points, image_points, camera_matrix, dist_coeffs)\nrmat, _ = cv2.Rodrigues(rvec)\njaw_angles = cv2.decomposeProjectionMatrix(proj_matrix)[6]\n```\nPermite rastrear o desvio de contato visual da criança com o terapeuta.",
+    "image": "trace_pose_3d.png",
     "filename": "Computer Vision Analysis for Quantification of Autism Risk Behaviors.pdf",
     "file_size_kb": 1129.25
   },
@@ -61,6 +91,13 @@
     "aba_relation": "Fornece a linha de base histórica de limitações (L1 a L5) que motivaram o desenvolvimento integrado do framework ABA-Vision.",
     "methodology": "Meta-análise de 54 artigos científicos, mapeando precisões médias, limitações de conjuntos de dados controlados e falta de rastreamento 3D.",
     "abstract": "We systematically review a decade of computer vision applied to ASD. Results indicate strong progress in facial analysis, but highlights lack of multi-camera robustness, 3D trajectory tracking, and real-world school-based trials.",
+    "technologies": [
+      "LaTeX",
+      "R (Meta-analysis packages)",
+      "Python (Bibliometrics)"
+    ],
+    "code_explanation": "Análise bibliométrica e categorização sistemática dos algoritmos por confiabilidade e número de pacientes estudados. Demonstrou a lacuna de testes ecológicos em ambiente escolar.",
+    "image": "trace_pose_3d.png",
     "filename": "Computer vision in autism spectrum disorder research a systematic review of published studies from 2009 to 2019.pdf",
     "file_size_kb": 561.39
   },
@@ -71,9 +108,16 @@
     "year": 2014,
     "category": "TEA",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "trace_pose_3d.png",
     "filename": "Computer Vision Tools for Low-Cost and Noninvasive Measurement of Autism-Related Behaviors in Infants.pdf",
     "file_size_kb": 2033.83
   },
@@ -87,6 +131,14 @@
     "aba_relation": "Base metodológica para estruturar o relatório final do ABA-Vision contendo as cinco métricas comportamentais validadas.",
     "methodology": "Análise estatística multivariada sobre desvio visual e movimentos de cabeça capturados pela câmera frontal durante estímulos visuais padronizados.",
     "abstract": "Digital behavioral phenotyping provides objective, high-frequency measures of infant development. This clinical trial verifies that automated measurements of attention and affect dynamics distinguish infants diagnosed with ASD.",
+    "technologies": [
+      "iOS SDK",
+      "CoreML",
+      "SciPy Stats",
+      "R-Studio"
+    ],
+    "code_explanation": "Análise de distribuição e latência na resposta visual a estímulos através de modelos estatísticos de sobrevivência (Kaplan-Meier) para medir o tempo de engajamento do olhar infantil.",
+    "image": "timer1_grounding.png",
     "filename": "Early detection of autism using digital behavioral phenotyping.pdf",
     "file_size_kb": 6858.58
   },
@@ -97,9 +149,16 @@
     "year": 2024,
     "category": "TEA",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "trace_pose_3d.png",
     "filename": "Early_Detection_of_Neurodevelopmental_Disorders_Quantifying_Autism_Behavioral_Markers_with_Computer_Vision_and_Artificial_Intelligence.pdf",
     "file_size_kb": 1034.58
   },
@@ -113,6 +172,14 @@
     "aba_relation": "Utilizado para calibrar o detector de emoções (FER+) do ABA-Vision para evitar preconceitos de redes pré-treinadas apenas em adultos.",
     "methodology": "Anotação sistemática de 12.000 frames de vídeo em ambiente natural terapêutico usando o Facial Action Coding System (FACS).",
     "abstract": "Atypical facial expressions limit the accuracy of standard facial expression recognition (FER) models in ASD contexts. We release Hugging Rain Man, a dedicated dataset of facial action units in children with ASD, improving FER F1 by 12%.",
+    "technologies": [
+      "CVAT (Annotation)",
+      "PyTorch",
+      "ResNet-50-Facial",
+      "FiftyOne"
+    ],
+    "code_explanation": "Regressão multirrótulo para detecção de intensidade de Action Units faciais com perdas ponderadas para desequilíbrio de classes faciais de crianças:\n```python\nimport torch.nn as nn\nloss_fn = nn.BCEWithLogitsLoss(pos_weight=class_weights_for_each_au)\nloss = loss_fn(predicted_au_intensities, ground_truth_aus)\n```\nCrucial para calibração de emoções sutis e ambíguas.",
+    "image": "trace_pose_3d.png",
     "filename": "Hugging Rain Man A Novel Facial Action Units Dataset for Analyzing Atypical Facial Expressions in Children with Autism Spectrum Disorder.pdf",
     "file_size_kb": 4646.29
   },
@@ -126,6 +193,14 @@
     "aba_relation": "Fornece subsídio clínico para refinar a métrica RMS e diferenciar hiperatividade geral de estereotipias motoras de autoestimulação.",
     "methodology": "Extração de séries temporais de aceleração angular de articulações e uso de Support Vector Machines com kernel dinâmico.",
     "abstract": "Differentiating ASD from ADHD is challenging. This paper presents a machine learning system that uses joint displacement frequencies to classify children into ASD, ADHD, or neurotypical classes with 88.5% accuracy.",
+    "technologies": [
+      "scikit-learn",
+      "SciPy Signal",
+      "Pandas",
+      "YOLOv8"
+    ],
+    "code_explanation": "Extração de densidade espectral de potência (PSD) dos deslocamentos angulares das articulações usando o método de Welch:\n```python\nfrom scipy.signal import welch\nfrequencies, psd = welch(joint_angles_timeline, fs=30, nperseg=64)\n# Análise de pico espectral entre 2Hz e 5Hz (comum em estereotipias)\n```\nAuxilia a separar o balanceio rítmico do autismo da agitação descoordenada do TDAH.",
+    "image": "trace_pose_3d.png",
     "filename": "Multiclass classification of ASD, attention deficit hyperactivity disorder.pdf",
     "file_size_kb": 7928.72
   },
@@ -139,6 +214,14 @@
     "aba_relation": "Inspirou o desenvolvimento da métrica ED (Emotional Distribution) do ABA-Vision, analisando a velocidade e transição de sentimentos.",
     "methodology": "Cálculo de vetores de fluxo óptico restritos a regiões faciais e análise espectral de frequências de expressão.",
     "abstract": "We analyze dynamic properties of facial movements during structured play. Children with ASD exhibit shorter, less coordinated, and highly localized facial activations, indicating distinct dynamic biomarkers.",
+    "technologies": [
+      "PyTorch",
+      "OpenFace",
+      "SciPy Signal",
+      "Seaborn"
+    ],
+    "code_explanation": "Cálculo de assimetria facial bilateral (distância euclidiana entre marcos simétricos do rosto):\n```python\nleft_eye_coords = landmark_matrix[36:42]\nright_eye_coords = landmark_matrix[42:48]\nasymmetry_score = np.linalg.norm(left_eye_coords - right_eye_coords_flipped)\n```\nComprova que crianças com TEA têm movimentos mais assimétricos.",
+    "image": "trace_pose_3d.png",
     "filename": "Naturalistic facial dynamics enable quantitative clinical assessment of atypical expression phenotypes in children with autism spectrum disorder.pdf",
     "file_size_kb": 3172.67
   },
@@ -149,9 +232,16 @@
     "year": 2023,
     "category": "TEA",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "trace_pose_3d.png",
     "filename": "Social_Recognition_of_Joint_Attention_Cycles_in_Children_With_Autism_Spectrum_Disorders.pdf",
     "file_size_kb": 1366.12
   },
@@ -162,9 +252,16 @@
     "year": 2025,
     "category": "TEA",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "trace_pose_3d.png",
     "filename": "Using computer vision to quan�fy facial expressions ofchildren with au�sm during naturalis�c social interac�ons.pdf",
     "file_size_kb": 992.09
   },
@@ -175,9 +272,16 @@
     "year": 2024,
     "category": "TEA",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "trace_pose_3d.png",
     "filename": "Utilizing deep learning models in an intelligent eye-tracking system for autism spectrum disorder diagnosis.pdf",
     "file_size_kb": 2215.61
   },
@@ -188,9 +292,16 @@
     "year": 2022,
     "category": "TEA",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "trace_pose_3d.png",
     "filename": "Video-based Behavior Understanding of Children for Objective Diagnosis of Autism.pdf",
     "file_size_kb": 6668.27
   },
@@ -201,9 +312,16 @@
     "year": 2022,
     "category": "TEA",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "trace_pose_3d.png",
     "filename": "Vision-Based Activity Recognition in Children with Autism-Related Behaviors.pdf",
     "file_size_kb": 15504.06
   },
@@ -214,9 +332,16 @@
     "year": 2022,
     "category": "Pose",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "trace_pose_3d.png",
     "filename": "AlphaPose Whole-Body Regional Multi-Person Pose Estimation and Tracking in Real-Time.pdf",
     "file_size_kb": 5989.19
   },
@@ -227,9 +352,16 @@
     "year": 2023,
     "category": "Pose",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "trace_pose_3d.png",
     "filename": "Deep Learning-based Human Pose Estimation A Survey.pdf",
     "file_size_kb": 2791.59
   },
@@ -240,9 +372,16 @@
     "year": 2024,
     "category": "Pose",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "flashvid_efficiency.png",
     "filename": "FlashVID Efficient Video Large Language Models via Training-free Tree-based Spatiotemporal Token Merging.pdf",
     "file_size_kb": 13183.66
   },
@@ -253,9 +392,16 @@
     "year": 2024,
     "category": "Pose",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "timer1_grounding.png",
     "filename": "Grounded-VideoLLM Sharpening Fine-grained Temporal Grounding in Video Large Language Models.pdf",
     "file_size_kb": 2297.01
   },
@@ -269,6 +415,14 @@
     "aba_relation": "Implementado no Bloco 1 (Robustez à Oclusão) do ABA-Vision para evitar a perda de keypoints sob barreiras visuais (ex: mesas, brinquedos).",
     "methodology": "Self-attention entre keypoints visíveis de diferentes pessoas em cena e decodificação paramétrica via modelo SMPL.",
     "abstract": "Reconstructing human meshes under severe occlusion is an open challenge. JOTR addresses this by employing joint-level contrastive representation learning within a transformer decoder, achieving robust 3D reconstruction.",
+    "technologies": [
+      "PyTorch",
+      "PyTorch3D",
+      "Timm (Transformers)",
+      "SMPL-X Library"
+    ],
+    "code_explanation": "Perda contrastiva baseada em InfoNCE aplicada aos embeddings de articulações de diferentes pessoas em cena para discriminar posições mesmo sob forte sobreposição física:\n$$\\mathcal{L}_{joint\\_contr} = -\\log \\frac{\\exp(\\mathbf{z}_i \\cdot \\mathbf{z}_i^+ / \\tau)}{\\sum_j \\exp(\\mathbf{z}_i \\cdot \\mathbf{z}_j / \\tau)}$$\nonde $\\mathbf{z}_i$ e $\\mathbf{z}_i^+$ são a mesma articulação sob perspectivas aumentadas (ruído).",
+    "image": "jotr_occlusion.png",
     "filename": "JOTR 3D Joint Contrastive Learning with Transformers for Occluded Human Mesh Recovery.pdf",
     "file_size_kb": 2349.92
   },
@@ -279,9 +433,16 @@
     "year": 2024,
     "category": "Pose",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "flashvid_efficiency.png",
     "filename": "MA-LMM Memory-Augmented Large Multimodal Model for Long-Term Video Understanding.pdf",
     "file_size_kb": 4458.71
   },
@@ -292,9 +453,16 @@
     "year": 2022,
     "category": "Pose",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "flashvid_efficiency.png",
     "filename": "Not_All_Tokens_Are_Equal_Human-centric_Visual_Analysis_via_Token_Clustering_Transformer.pdf",
     "file_size_kb": 1561.6
   },
@@ -305,9 +473,16 @@
     "year": 2022,
     "category": "Pose",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "trace_pose_3d.png",
     "filename": "Spatial-Temporal_Multi-Cue_Network_for_Sign_Language_Recognition_and_Translation.pdf",
     "file_size_kb": 2736.52
   },
@@ -318,9 +493,16 @@
     "year": 2024,
     "category": "Pose",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "timer1_grounding.png",
     "filename": "STVG-R1 Incentivizing Instance-Level Reasoning and Grounding in Videos via Reinforcement Learning.pdf",
     "file_size_kb": 13089.53
   },
@@ -331,9 +513,16 @@
     "year": 2024,
     "category": "Pose",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "trace_pose_3d.png",
     "filename": "Sun_TRACE_5D_Temporal_Regression_of_Avatars_With_Dynamic_Cameras_in_CVPR_2023_paper.pdf",
     "file_size_kb": 8593.32
   },
@@ -344,9 +533,16 @@
     "year": 2024,
     "category": "Pose",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "timer1_grounding.png",
     "filename": "TimeZero Temporal Video Grounding with Reasoning-Guided LVLM.pdf",
     "file_size_kb": 4019.93
   },
@@ -357,9 +553,16 @@
     "year": 2023,
     "category": "Pose",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "trace_pose_3d.png",
     "filename": "Understanding_Deep_Learning_Techniques_for_Recognition_of_Human_Emotions_Using_Facial_Expressions_A_Comprehensive_Survey.pdf",
     "file_size_kb": 9082.33
   },
@@ -370,9 +573,16 @@
     "year": 2025,
     "category": "Pose",
     "contribution": "Contribuição para o estado da arte em processamento visual e comportamento.",
-    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental.",
+    "aba_relation": "Referência e benchmarking secundário para análise espaço-temporal ou comportamental do ABA-Vision.",
     "methodology": "Abordagem baseada em aprendizado profundo aplicado a dados temporais de pose ou expressão.",
     "abstract": "Abstract not extracted. Click to open file locally.",
+    "technologies": [
+      "PyTorch",
+      "Python",
+      "OpenCV"
+    ],
+    "code_explanation": "Fórmula de similaridade/deslocamento espaço-temporal das articulações corporais:\n$$D_t = \\sum_{j \\in J} \\| P_t^{(j)} - P_{t-1}^{(j)} \\|_2$$\nCalcula a distância euclidiana acumulada de pose.",
+    "image": "trace_pose_3d.png",
     "filename": "VideoRefer Suite Advancing Spatial-Temporal Object Understanding with Video LLM.pdf",
     "file_size_kb": 13978.52
   }

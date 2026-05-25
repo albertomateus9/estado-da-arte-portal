@@ -12,7 +12,9 @@ import {
   Sparkles,
   GitFork,
   ArrowUpDown,
-  BookMarked
+  BookMarked,
+  Terminal,
+  Activity
 } from 'lucide-react'
 import papersData from './assets/papers_db.json'
 
@@ -26,6 +28,9 @@ interface Paper {
   aba_relation: string
   methodology: string
   abstract: string
+  technologies: string[]
+  code_explanation: string
+  image: string
   filename: string
   file_size_kb: number
 }
@@ -46,28 +51,32 @@ export default function App() {
       title: '3D Pose (TRACE/ROMP)',
       description: 'Estimação tridimensional de articulações e profundidade.',
       keywords: ['trace', 'pose', 'mesh', 'romp', 'alphapose', 'hpe'],
-      icon: Layers
+      icon: Layers,
+      image: 'trace_pose_3d.png'
     },
     {
       id: 'occlusion',
       title: 'Robustez à Oclusão (GLAMR/JOTR)',
-      description: 'Reconstrução de trajetórias sob barreiras visuais.',
+      description: 'Reconstrução de trajetórias sob oclusões e barreiras.',
       keywords: ['jotr', 'glamr', 'occlusion', 'tracking', 'occluded'],
-      icon: GitFork
+      icon: GitFork,
+      image: 'jotr_occlusion.png'
     },
     {
       id: 'grounding',
       title: 'Grounding Temporal (Time-R1)',
       description: 'Refinamento de latência e segmentação de eventos.',
       keywords: ['timezero', 'grounding', 'timer1', 'videollm', 'temporal', 'stvg', 'r1'],
-      icon: Sparkles
+      icon: Sparkles,
+      image: 'timer1_grounding.png'
     },
     {
       id: 'efficiency',
       title: 'Token Merging (FlashVID/MA-LMM)',
       description: 'Compressão dinâmica de contexto e processamento longo.',
       keywords: ['flashvid', 'lmm', 'token', 'efficiency', 'ma lmm', 'long term', 'context'],
-      icon: Cpu
+      icon: Cpu,
+      image: 'flashvid_efficiency.png'
     }
   ]
 
@@ -90,13 +99,14 @@ export default function App() {
           paper.authors.toLowerCase().includes(searchTerm.toLowerCase()) ||
           paper.contribution.toLowerCase().includes(searchTerm.toLowerCase()) ||
           paper.methodology.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          paper.year.toString().includes(searchTerm)
+          paper.year.toString().includes(searchTerm) ||
+          paper.technologies.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()))
 
         // Category Filter
         const matchesCategory =
           selectedCategory === 'ALL' || paper.category === selectedCategory
 
-        // Dynamic Module Filter (highlights relationship to TRACE, Time-R1, etc.)
+        // Dynamic Module Filter
         let matchesModule = true
         if (activeModuleFilter) {
           const module = abaModules.find(m => m.id === activeModuleFilter)
@@ -121,10 +131,15 @@ export default function App() {
 
   const handleModuleClick = (moduleId: string) => {
     if (activeModuleFilter === moduleId) {
-      setActiveModuleFilter(null) // deselect
+      setActiveModuleFilter(null)
     } else {
       setActiveModuleFilter(moduleId)
     }
+  }
+
+  // Helper to dynamically get image URLs in Vite
+  const getPaperImageUrl = (imageName: string) => {
+    return new URL(`./assets/images/${imageName}`, import.meta.url).href
   }
 
   return (
@@ -194,14 +209,24 @@ export default function App() {
                   border: isActive ? '1.5px solid var(--accent-glow)' : '1px solid rgba(255, 255, 255, 0.05)'
                 }}
               >
-                <div className="matrix-header">
-                  <Icon size={20} className={isActive ? 'text-cyan' : 'text-grey'} />
-                  <h3>{module.title}</h3>
+                <div className="matrix-image-wrapper">
+                  <img
+                    src={getPaperImageUrl(module.image)}
+                    alt={module.title}
+                    className="matrix-bg-img"
+                  />
+                  <div className="matrix-overlay-shading" />
                 </div>
-                <p>{module.description}</p>
-                <span className="matrix-badge">
-                  {isActive ? 'Filtro Ativo' : 'Clique para filtrar'}
-                </span>
+                <div className="matrix-card-content">
+                  <div className="matrix-header">
+                    <Icon size={20} className={isActive ? 'text-cyan' : 'text-grey'} />
+                    <h3>{module.title}</h3>
+                  </div>
+                  <p>{module.description}</p>
+                  <span className="matrix-badge">
+                    {isActive ? 'Filtro Ativo' : 'Clique para filtrar'}
+                  </span>
+                </div>
               </button>
             )
           })}
@@ -214,7 +239,7 @@ export default function App() {
           <Search size={18} className="search-icon" />
           <input
             type="text"
-            placeholder="Buscar por título, autores, contribuição ou palavras-chave..."
+            placeholder="Buscar por título, autores, tecnologia, contribuição ou palavra-chave..."
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
           />
@@ -318,6 +343,16 @@ export default function App() {
                   {paper.contribution}
                 </p>
 
+                {/* Micro tech pills on card */}
+                <div className="card-tech-pills">
+                  {paper.technologies.slice(0, 3).map((tech, index) => (
+                    <span key={index} className="tech-pill-micro">{tech}</span>
+                  ))}
+                  {paper.technologies.length > 3 && (
+                    <span className="tech-pill-micro-more">+{paper.technologies.length - 3}</span>
+                  )}
+                </div>
+
                 <div className="card-footer">
                   <div className="relation-tag">
                     <Bookmark size={12} />
@@ -351,6 +386,20 @@ export default function App() {
             </header>
 
             <div className="modal-content">
+              {/* Image Preview Header */}
+              <div className="modal-image-showcase">
+                <img
+                  src={getPaperImageUrl(selectedPaper.image)}
+                  alt={selectedPaper.title}
+                  className="showcase-img"
+                />
+                <div className="showcase-gradient" />
+                <div className="showcase-caption">
+                  <Activity size={14} className="text-cyan animate-pulse" />
+                  <span>Modelo de Referência ABA-Vision</span>
+                </div>
+              </div>
+
               <h2 className="modal-title">{selectedPaper.title}</h2>
               <div className="modal-meta">
                 <div className="meta-item">
@@ -370,6 +419,16 @@ export default function App() {
                 </div>
               </div>
 
+              {/* Technologies Section */}
+              <div className="content-section">
+                <h3><Cpu size={16} /> Tecnologias e Frameworks</h3>
+                <div className="tech-pills-container">
+                  {selectedPaper.technologies.map((tech, index) => (
+                    <span key={index} className="tech-pill-large">{tech}</span>
+                  ))}
+                </div>
+              </div>
+
               <hr className="divider" />
 
               <div className="content-section">
@@ -383,8 +442,24 @@ export default function App() {
               </div>
 
               <div className="content-section">
-                <h3><Cpu size={16} /> Metodologia e Abordagem</h3>
+                <h3><Bookmark size={16} /> Metodologia e Abordagem</h3>
                 <p className="text-secondary">{selectedPaper.methodology}</p>
+              </div>
+
+              {/* Code & Math Explanation Section */}
+              <div className="content-section code-math-section">
+                <h3><Terminal size={16} className="text-purple" /> Algoritmo & Formulação Matemática</h3>
+                <div className="code-block-wrapper">
+                  <div className="code-header">
+                    <span className="dot red"></span>
+                    <span className="dot yellow"></span>
+                    <span className="dot green"></span>
+                    <span className="code-title">kernel_compilation.py / mathematical_formulas</span>
+                  </div>
+                  <pre className="code-pre">
+                    <code>{selectedPaper.code_explanation}</code>
+                  </pre>
+                </div>
               </div>
 
               <div className="content-section relation-section">
