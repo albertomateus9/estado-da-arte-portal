@@ -21,6 +21,22 @@ except ImportError:
 # Predefined dictionary for rich, human-quality academic metadata matching the 29 PDFs
 CURATED_DATABASE = {
     # TEA Folder
+    "computer vision based assessment of autistic children analyzing interactions emotions human pose and life skills": {
+        "title": "Computer Vision-Based Assessment of Autistic Children: Analyzing Interactions, Emotions, Human Pose, and Life Skills",
+        "authors": "Varun Ganjigunte Prakash, Manu Kohli, Swati Kohli, A. P. Prathosh, Tanu Wadhera, Diptanshu Das, Debasis Panigrahi, John Vijay Sagar Kommu",
+        "year": 2023,
+        "category": "TEA",
+        "contribution": "Framework pioneiro que integra múltiplos modelos de visão computacional (Activity Comprehension, FER, Joint Attention) para avaliação quantitativa objetiva de autismo alinhada aos ratings ADOS-2, CARS-2 e VBMAPP.",
+        "aba_relation": "Artigo âncora e referência principal de todo o ecossistema ABA-Vision, definindo os requisitos de design clínicos e métricas comportamentais (JA, IRL, RMS, SER).",
+        "methodology": "Modelo híbrido de detecção e classificação temporal de atividades (Faster R-CNN + ResNet-50 + LSTM), detector de emoções FER+ customizado para atipicidades e modelos de atenção conjunta (rastreamento de olhar baseado em pose de cabeça via PnP e detector de apontamento baseado em Faster R-CNN treinado em 24.369 imagens).",
+        "abstract": "Standardized clinical observation scales like ADOS-2 and CARS-2 are gold standards for diagnosing ASD in children but are labor-intensive, variable, and expensive. This paper introduces an integrated computer vision framework to quantitatively measure children's activities, facial expressions, pointing behaviors, and joint attention follow-gaze. Evaluating the framework on 21 clinical videos and 27 public videos demonstrates high alignment with clinical raters, offering therapists reproducible, automated developmental graphs.",
+        "technologies": ["Faster R-CNN", "ResNet-50", "LSTM", "TensorFlow", "OpenCV", "OpenFace", "PyTorch"],
+        "code_explanation": "Cálculo de alinhamento temporal e t-IoU para validação de atividades contra anotações clínicas:\n```python\ndef compute_temporal_iou(pred_interval, gt_interval):\n    # pred_interval e gt_interval são tuplas (start_time, end_time)\n    intersection = max(0.0, min(pred_interval[1], gt_interval[1]) - max(pred_interval[0], gt_interval[0]))\n    union = (pred_interval[1] - pred_interval[0]) + (gt_interval[1] - gt_interval[0]) - intersection\n    return intersection / union if union > 0 else 0.0\n```\nO limiar de verdadeiro positivo para atividades é $\\text{t-IoU} \\ge 0.30$.",
+        "image": "prakash_architecture.png",
+        "population": "Crianças com autismo de 1 a 5 anos (N=300)",
+        "environment": "Clínico e Vídeos Públicos",
+        "clinical_ref": "ADOS-2 & CARS-2 & VBMAPP"
+    },
     "a computer vision-based physical activity application for children with autism": {
         "title": "A Computer Vision-Based Physical Activity Application for Children with Autism",
         "authors": "L. Martinez, J. Smith, R. Davis",
@@ -596,7 +612,8 @@ def main():
     scanned_papers = []
     dirs_to_scan = [
         (tea_dir, "TEA"),
-        (pose_dir, "Pose")
+        (pose_dir, "Pose"),
+        (root_dir / "Paper_1", "TEA")
     ]
 
     for directory, cat in dirs_to_scan:
